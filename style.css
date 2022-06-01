@@ -1,0 +1,73 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+*:focus {
+  outline: none; }
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #fafafa;
+  color: #fff; }
+
+.meals__container {
+  width: 25rem;
+  background: #7a7a7a; }
+
+.meals__header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem; }
+
+.meals__search-input {
+  padding: .5rem;
+  margin-right: .5rem; }
+
+.meals__search-icon {
+  font-size: 1.25rem; }
+
+.meals__fav {
+  background: #16609d;
+  padding: 2rem 1rem;
+  text-align: center; }
+  .meals__fav-title {
+    margin-bottom: 1rem; }
+  .meals__fav-list {
+    list-style: none;
+    display: flex;
+    justify-content: center; }
+  .meals__fav-item {
+    margin: 0 .3rem; }
+    .meals__fav-item img {
+      width: 5rem;
+      height: 5rem;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: .2rem; }
+
+.meals__intro {
+  margin: 1.5rem 1rem; }
+  .meals__intro-img {
+    position: relative; }
+    .meals__intro-img img {
+      max-width: 100%; }
+    .meals__intro-img span {
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: .3rem 1rem;
+      text-align: center;
+      background: #7a7a7a;
+      margin: .2rem; }
+  .meals__intro-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .5rem 1rem 0; }
+    .meals__intro-footer h3 {
+      font-size: 1.5rem; }

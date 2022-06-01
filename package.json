@@ -1,0 +1,14 @@
+{
+  "name": "recipe_app",
+  "version": "1.0.0",
+  "description": "A recipe app for searching and showing detailed recipe",
+  "main": "script.js",
+  "scripts": {
+    "compile:sass": "node-sass sass/style.scss style.css -w"
+  },
+  "author": "Alamin Hira",
+  "license": "ISC",
+  "devDependencies": {
+    "node-sass": "^7.0.1"
+  }
+}

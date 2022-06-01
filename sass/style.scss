@@ -1,0 +1,107 @@
+// Variables
+$bgClr-primary: #7a7a7a;;
+$bgClr-secondary: rgb(22, 96, 157);
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*:focus {
+    outline: none;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #fafafa;
+    color: #fff;
+}
+
+.meals {
+    &__container {
+        width: 25rem;
+        background: $bgClr-primary;
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+
+    &__search {
+        &-input {
+            padding: .5rem;
+            margin-right: .5rem;
+        }
+
+        &-icon {
+            font-size: 1.25rem;
+        }
+    }
+
+    &__fav {
+        background: $bgClr-secondary;
+        padding: 2rem 1rem;
+        text-align: center;
+
+        &-title {
+            margin-bottom: 1rem;
+        }
+
+        &-list {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+        }
+
+        &-item {
+            margin: 0 .3rem;
+            
+            img {
+                width: 5rem;
+                height: 5rem;
+                object-fit: cover;
+                border-radius: 50%;
+                margin-bottom: .2rem;
+            }
+        }
+    }
+
+    &__intro {
+        margin: 1.5rem 1rem;
+        &-img {
+            position: relative;
+
+            img {
+                max-width: 100%;
+            }
+
+            span {
+                position: absolute;
+                top: 0;
+                left: 0;
+                padding: .3rem 1rem;
+                text-align: center;
+                background: $bgClr-primary;
+                margin: .2rem;
+            }
+        }
+
+        &-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: .5rem 1rem 0;
+
+            h3 {
+                font-size: 1.5rem;
+            }
+        }
+    }
+}
