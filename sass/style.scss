@@ -1,6 +1,8 @@
 // Variables
 $bgClr-primary: #7a7a7a;;
 $bgClr-secondary: rgb(22, 96, 157);
+$bgClr-tertiary: #fafafa;
+$shadow-prim: 0 0 0.7rem rgba(0, 0, 0, 0.5);
 
 * {
     margin: 0;
@@ -13,25 +15,57 @@ $bgClr-secondary: rgb(22, 96, 157);
 }
 
 body {
+    font-size: 1rem;
+    line-height: 1.7;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: #fafafa;
-    color: #fff;
+    background: $bgClr-tertiary;
+    overflow-y: hidden;
+
+    &.hidden {
+        overflow-x: hidden;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: $bgClr-primary;
+            z-index: 9;
+            transition: all .1s ease-in-out;
+        }
+    }
+}
+
+a,
+a:hover {
+    display: inline-block;
+    text-decoration: none;
+    color: inherit;
+}
+
+img {
+    max-width: 100%;
 }
 
 .meals {
     &__container {
         width: 25rem;
+        color: #fff;
         background: $bgClr-primary;
+        margin: .5rem 0;
     }
 
     &__header {
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 1rem;
+        padding: 1rem 0;
     }
 
     &__search {
@@ -47,7 +81,7 @@ body {
 
     &__fav {
         background: $bgClr-secondary;
-        padding: 2rem 1rem;
+        padding: 1rem;
         text-align: center;
 
         &-title {
@@ -55,13 +89,14 @@ body {
         }
 
         &-list {
-            list-style: none;
             display: flex;
             justify-content: center;
+            list-style: none;
         }
 
         &-item {
             margin: 0 .3rem;
+            cursor: pointer;
             
             img {
                 width: 5rem;
@@ -75,15 +110,12 @@ body {
 
     &__card {
         margin: 1.5rem 1rem;
-        box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.5);
+        box-shadow: $shadow-prim;
         padding: 0 0 1rem 0;
+        cursor: pointer;
         
         &-img {
             position: relative;
-
-            img {
-                max-width: 100%;
-            }
 
             span {
                 position: absolute;
@@ -93,6 +125,7 @@ body {
                 text-align: center;
                 background: $bgClr-primary;
                 margin: .2rem;
+                color: #fff;
             }
         }
 
@@ -105,6 +138,57 @@ body {
             h3 {
                 font-size: 1.5rem;
             }
+        }
+    }
+
+    &__popup {
+        position: absolute;
+        background: $bgClr-tertiary;
+        transform: translateY(0);
+        z-index: 99;
+        transition: transform .3s ease-in-out;
+
+        &-container {
+            max-width: 40rem;
+            box-shadow: $shadow-prim;
+            padding: 2rem;
+            position: relative;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        &-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        &-details {
+            margin-top: 1rem;
+        }
+
+        &-ings {
+            h3 {
+                font-size: 1.5rem;
+                margin: 1.5rem 0;
+            }
+        }
+
+        &-list {
+            padding-left: 2.5rem;
+        }
+
+        &-close {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        &.hidden {
+            opacity: 0;
+            transform: translateY(-100%);
         }
     }
 }

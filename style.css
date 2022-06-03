@@ -7,22 +7,48 @@
   outline: none; }
 
 body {
+  font-size: 1rem;
+  line-height: 1.7;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   background: #fafafa;
-  color: #fff; }
+  overflow-y: hidden; }
+  body.hidden {
+    overflow-x: hidden; }
+    body.hidden::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #7a7a7a;
+      z-index: 9;
+      transition: all .1s ease-in-out; }
+
+a,
+a:hover {
+  display: inline-block;
+  text-decoration: none;
+  color: inherit; }
+
+img {
+  max-width: 100%; }
 
 .meals__container {
   width: 25rem;
-  background: #7a7a7a; }
+  color: #fff;
+  background: #7a7a7a;
+  margin: .5rem 0; }
 
 .meals__header {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1rem; }
+  padding: 1rem 0; }
 
 .meals__search-input {
   padding: .5rem;
@@ -33,16 +59,17 @@ body {
 
 .meals__fav {
   background: #16609d;
-  padding: 2rem 1rem;
+  padding: 1rem;
   text-align: center; }
   .meals__fav-title {
     margin-bottom: 1rem; }
   .meals__fav-list {
-    list-style: none;
     display: flex;
-    justify-content: center; }
+    justify-content: center;
+    list-style: none; }
   .meals__fav-item {
-    margin: 0 .3rem; }
+    margin: 0 .3rem;
+    cursor: pointer; }
     .meals__fav-item img {
       width: 5rem;
       height: 5rem;
@@ -53,11 +80,10 @@ body {
 .meals__card {
   margin: 1.5rem 1rem;
   box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.5);
-  padding: 0 0 1rem 0; }
+  padding: 0 0 1rem 0;
+  cursor: pointer; }
   .meals__card-img {
     position: relative; }
-    .meals__card-img img {
-      max-width: 100%; }
     .meals__card-img span {
       position: absolute;
       top: 0;
@@ -65,7 +91,8 @@ body {
       padding: .3rem 1rem;
       text-align: center;
       background: #7a7a7a;
-      margin: .2rem; }
+      margin: .2rem;
+      color: #fff; }
   .meals__card-footer {
     display: flex;
     justify-content: space-between;
@@ -73,3 +100,37 @@ body {
     padding: .5rem 1rem 0; }
     .meals__card-footer h3 {
       font-size: 1.5rem; }
+
+.meals__popup {
+  position: absolute;
+  background: #fafafa;
+  transform: translateY(0);
+  z-index: 99;
+  transition: transform .3s ease-in-out; }
+  .meals__popup-container {
+    max-width: 40rem;
+    box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.5);
+    padding: 2rem;
+    position: relative;
+    height: 100vh;
+    overflow-y: auto; }
+  .meals__popup-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 2rem; }
+  .meals__popup-details {
+    margin-top: 1rem; }
+  .meals__popup-ings h3 {
+    font-size: 1.5rem;
+    margin: 1.5rem 0; }
+  .meals__popup-list {
+    padding-left: 2.5rem; }
+  .meals__popup-close {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 1.5rem;
+    cursor: pointer; }
+  .meals__popup.hidden {
+    opacity: 0;
+    transform: translateY(-100%); }
