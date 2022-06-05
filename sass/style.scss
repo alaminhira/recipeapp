@@ -146,7 +146,8 @@ img {
         background: $bgClr-tertiary;
         transform: translateY(0);
         z-index: 99;
-        transition: transform .3s ease-in-out;
+        // change transform => all
+        // transition: transform .3s ease-in-out;
 
         &-container {
             max-width: 40rem;
@@ -192,3 +193,93 @@ img {
         }
     }
 }
+
+
+
+// // Should go to Scss Style
+// body {
+//     position: relative;
+// }
+
+// .meals__loader {
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     width: 100vw;
+//     height: 100vh;
+//     background: #666;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     opacity: 0;
+//     visibility: hidden;
+// }
+
+// .meals__loader.loading {
+//     opacity: 1;
+//     visibility: visible;
+// }
+
+// .meals__loader-spinner {
+//     font-size: 3rem;
+//     animation: spin 1s linear infinite;
+// }
+
+// @keyframes spin {
+//     0% {
+//         transform: rotate(0deg);
+//     }
+
+//     100% {
+//         transform: rotate(360deg);
+//     }
+// }
+
+// .meals__popup {
+//     margin: .5rem 0;
+//     width: 100vw;
+//     height: 100vh;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     padding: .5rem 0;
+//     background: #7a7a7a;
+//     transition: all .3s ease-in-out !important;
+// }
+
+// .meals__popup-container {
+//     background: #fff;
+//     height: 96vh;
+// }
+
+// .meals__popup-info {
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     padding-top: 1rem;
+// }
+
+// .meals__popup-info span {
+//     background: #7a7a7a;
+//     color: #fafafa;
+//     border-radius: 1rem;
+//     padding: 0 1rem;
+// }
+
+// .meals__popup-heart {
+//     cursor: pointer;
+// }
+
+// .meals__card-footer h3 {
+//     flex-basis: 75%;
+// }
+
+// .meals__card-footer span {
+//     flex-basis: 25%;
+//     font-size: .875rem;
+// }
+
+// .meals__card-heart:hover {
+//     color: red
+// }
+

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <!-- Main Style -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="loader.css">
     <!-- Page Script -->
     <script defer src="script.js"></script>
 </head>
@@ -35,25 +36,19 @@
         <!-- Main Meals -->
         <div class="meals__main">
             <!-- Meals Item card -->
-            <!-- <div class="meals__card" href="#">
-                <div class="meals__card-img">
-                    <img src="main-meal.jpg" alt="">
-                    <span>Random Recipe</span>
-                </div>
-                <div class="meals__card-footer">
-                    <h3>Meals Title Number 01</h3>
-                    <span><i class="far fa-clock"></i> 2 min read</span>
-                </div>
-            </div> -->
+           
         </div>
     </section>
     <!-- Meals Details Popup -->
     <div class="meals__popup hidden">
         <div class="meals__popup-container">
             <h2 class="meals__popup-title">Lorem ipsum dolor sit amet.</h2>
-            <div class="meals__card-img">
+            <div class="meals__popup-header">
                 <img src="main-meal.jpg" alt="">
-                <span>Random Recipe</span>
+                <p class="meals__popup-info">
+                    <span>Random Recipe</span>
+                    <i class="far fa-heart meals__popup-heart"></i>
+                </p>
             </div>
             <p class="meals__popup-details">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima veritatis
                 accusamus illum eius vitae tempora, iure perferendis dolore veniam odit cupiditate molestiae praesentium
@@ -67,6 +62,10 @@
             </div>
             <i class="fas fa-close meals__popup-close"></i>
         </div>
+    </div>
+    <!-- Loader -->
+    <div class="meals__loader">
+        <i class="fas fa-spinner meals__loader-spinner"></i>
     </div>
 </body>
 

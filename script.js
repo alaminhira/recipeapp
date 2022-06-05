@@ -11,7 +11,19 @@ const mealsContainer = _('.meals__container');
 const mealsMain = _('.meals__main');
 const favList = _('.meals__fav-list');
 const mealsPopup = _('.meals__popup');
-const popupClose = _('.meals__popup-close');
+const loader = _('.meals__loader');
+
+const dataObj = {
+    mealMain: ''
+}
+
+const renderLoader = () => {
+    loader.classList.add('loading');
+}
+
+const hideLoader = data => {
+    data && loader.classList.remove('loading');
+}
 
 const getData = async function (url) {
     const res = await fetch(url);
@@ -56,11 +68,30 @@ const renderFavMeals = async function () {
 
 }
 
+const toggleFavItem = function(e) {
+    console.log('top')
+    const love = _('.meals__popup-heart');
+    if (e.target !== love) return;
+
+    // 1) Toggle love icon
+    ['fas', 'far'].forEach(cls => love.classList.toggle(cls));
+    
+    // 2) Add to fav Item
+
+    // 3) Remove from fav item
+    console.log(love)
+}
+
 const renderMainMeal = async function () {
+    // Render loader
+    renderLoader();
     const data = await getData('https://www.themealdb.com/api/json/v1/1/random.php');
 
     const meal = data.meals[0];
     const readingTime = calcReadingTime(meal);
+
+    // Hide loader
+    hideLoader(meal);
 
     const mealcard = `
         <div class="meals__card mealItem" data-id="${meal.idMeal}">
@@ -70,7 +101,7 @@ const renderMainMeal = async function () {
             </div>
             <div class="meals__card-footer">
                 <h3>${meal.strMeal}</h3>
-                <span><i class="far fa-clock"></i> ${readingTime} min read</span>
+                <span><i class="far fa-clock"></i> ${readingTime} Min Read</span>
             </div>
         </div>
         `;
@@ -78,9 +109,11 @@ const renderMainMeal = async function () {
     mealsMain.innerHTML = mealcard;
 }
 
-const renderMealsPopup = async function (e) {
-    // Guard clause
+const toggleMealsPopup = async function(e) {
     if (!e.target.closest('.mealItem')) return;
+    
+    // Render Loader
+    renderLoader();
 
     const id = e.target.closest('.mealItem').dataset.id;
     
@@ -88,14 +121,19 @@ const renderMealsPopup = async function (e) {
     const meal = data.meals[0];
 
     const ingsArr = listIngredients(meal);
-    // const readingTime = calcReadingTime(meal, ingsArr); 
+    
+    // When meal is ready, hide loader
+    hideLoader(meal);
 
     const details = `
         <div class="meals__popup-container">
             <h2 class="meals__popup-title">${meal.strMeal}</h2>
-            <div class="meals__card-img">
-                <img src="${meal.strMealThumb}" alt="">
-                <span>${meal.strArea}</span>
+            <div class="meals__popup-header">
+                <img src="main-meal.jpg" alt="">
+                <p class="meals__popup-info">
+                    <span>Random Recipe</span>
+                    <i class="far fa-heart meals__popup-heart"></i>
+                </p>
             </div>
             <p class="meals__popup-details">${meal.strInstructions}</p>
             <div class="meals__popup-ings">
@@ -110,21 +148,27 @@ const renderMealsPopup = async function (e) {
         </div>
         `;
 
-        // Open popup
-        mealsPopup.innerHTML = details;
-        mealsPopup.classList.remove('hidden');
-        body.classList.add('hidden');
+    // Open popup
+    openPopup(details);
 
         // Close popup
-        if (e.target.matches('.meals__popup-close')) closePupup();
+    _('.meals__popup-close').addEventListener('click', closePopup);
 }
 
-const closePupup = function() {
+const openPopup = details => {
+    mealsPopup.innerHTML = details;
+    mealsPopup.classList.remove('hidden');
+}
+
+const closePopup = () => {
     mealsPopup.classList.add('hidden');
-    body.classList.remove('hidden');
 }
 
-renderMainMeal();
-renderFavMeals();
-mealsContainer.addEventListener('click', renderMealsPopup);
-mealsPopup.addEventListener('click', closePupup);
+const init = function() {
+    renderMainMeal();
+    renderFavMeals();
+    mealsContainer.addEventListener('click', toggleMealsPopup);
+    mealsPopup.addEventListener('click', toggleFavItem);
+}
+
+init();
