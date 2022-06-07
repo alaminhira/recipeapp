@@ -13,9 +13,7 @@ const favList = _('.meals__fav-list');
 const mealsPopup = _('.meals__popup');
 const loader = _('.meals__loader');
 
-const dataObj = {
-    mealMain: ''
-}
+const lovedMeals = []
 
 const renderLoader = () => {
     loader.classList.add('loading');
@@ -68,18 +66,36 @@ const renderFavMeals = async function () {
 
 }
 
-const toggleFavItem = function(e) {
-    console.log('top')
+const toggleFavItem = async function(e) {
     const love = _('.meals__popup-heart');
     if (e.target !== love) return;
 
+    let id = '';
     // 1) Toggle love icon
-    ['fas', 'far'].forEach(cls => love.classList.toggle(cls));
-    
+    if (love.classList.contains('far')) {
+        // Add love icon
+        love.classList.replace('far', 'fas');
+        id = love.closest('.meals__popup-container').dataset.id;
+
+        const data = await getData(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
+        const meal = data.meals[0];
+        meal.isLoved = 'fas';
+
+        lovedMeals.push(meal);
+
+    } else {
+        // remove love icon
+        love.classList.replace('fas', 'far');
+        const i = lovedMeals.findIndex(meal => meal.idMeal === id);
+
+        console.log(i);
+        lovedMeals.splice(i, 1);
+    }
+
     // 2) Add to fav Item
+    console.log(lovedMeals)
 
     // 3) Remove from fav item
-    console.log(love)
 }
 
 const renderMainMeal = async function () {
@@ -116,9 +132,12 @@ const toggleMealsPopup = async function(e) {
     renderLoader();
 
     const id = e.target.closest('.mealItem').dataset.id;
-    
-    const data = await getData(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
-    const meal = data.meals[0];
+
+    const data = lovedMeals.find(meal => meal.idMeal === id) || await getData(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
+
+    const meal = data.meals ? data.meals[0] : data;
+
+    const clsLoved = meal.isLoved ?? 'far';
 
     const ingsArr = listIngredients(meal);
     
@@ -126,13 +145,13 @@ const toggleMealsPopup = async function(e) {
     hideLoader(meal);
 
     const details = `
-        <div class="meals__popup-container">
+        <div class="meals__popup-container" data-id="${meal.idMeal}">
             <h2 class="meals__popup-title">${meal.strMeal}</h2>
             <div class="meals__popup-header">
                 <img src="main-meal.jpg" alt="">
                 <p class="meals__popup-info">
                     <span>Random Recipe</span>
-                    <i class="far fa-heart meals__popup-heart"></i>
+                    <i class="${clsLoved} fa-heart meals__popup-heart"></i>
                 </p>
             </div>
             <p class="meals__popup-details">${meal.strInstructions}</p>
