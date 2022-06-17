@@ -1,5 +1,6 @@
 // Variables
-$bgClr-primary: #7a7a7a;;
+$bgClr-primary: #7a7a7a;
+;
 $bgClr-secondary: rgb(22, 96, 157);
 $bgClr-tertiary: #fafafa;
 $shadow-prim: 0 0 0.7rem rgba(0, 0, 0, 0.5);
@@ -55,6 +56,7 @@ img {
 
 .meals {
     &__container {
+        position: relative;
         width: 25rem;
         color: #fff;
         background: $bgClr-primary;
@@ -62,20 +64,101 @@ img {
     }
 
     &__header {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 1rem 0;
+        padding: 1rem;
+    }
+
+    &__body {
+        position: relative;
     }
 
     &__search {
+
+        &-box {
+            max-width: 15rem;
+            position: relative;
+            margin: 0 auto;
+            background: $bgClr-tertiary;
+        }
+
         &-input {
+            position: relative;
+            background: transparent;
             padding: .5rem;
             margin-right: .5rem;
+            width: 100%;
+            z-index: 9;
         }
 
         &-icon {
+            line-height: 1;
             font-size: 1.25rem;
+            position: absolute;
+            color: $bgClr-primary;
+            right: .5rem;
+            top: .5rem;
+        }
+
+        &-list {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background: $bgClr-primary;
+            z-index: 99;
+            overflow-y: auto;
+            box-shadow: $shadow-prim;
+            // display: none;
+
+            &::before {
+                font-family: FontAwesome;
+                content: "\f00d";
+                position: absolute;
+                line-height: 1;
+                right: .5rem;
+                padding: .2rem;
+                font-size: 2rem;
+                cursor: pointer;
+            }
+        }
+
+        &-item {
+            display: flex;
+            align-items: center;
+            box-shadow: $shadow-prim;
+            padding: 1rem;
+            border-radius: .5rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+        }
+
+        &-img {
+            position: relative;
+            flex-basis: 35%;
+            margin-right: 1rem;
+
+            img {
+                width: 7rem;
+                height: 7rem;
+                border-radius: 50%;
+            }
+        }
+
+        &-details {
+            flex-basis: 70%;
+
+            h4 {
+                font-size: 1.5rem;
+                line-height: 1;
+                margin-top: .5rem;
+            }
+        }
+
+        &-info {
+            display: flex;
+            justify-content: space-between;
+
+            span > i {
+                margin-right: .5rem;
+            }
         }
     }
 
@@ -97,7 +180,7 @@ img {
         &-item {
             margin: 0 .3rem;
             cursor: pointer;
-            
+
             img {
                 width: 5rem;
                 height: 5rem;
@@ -108,12 +191,15 @@ img {
         }
     }
 
+    &__main {
+        padding: 1.5rem 1rem;
+    }
+
     &__card {
-        margin: 1.5rem 1rem;
         box-shadow: $shadow-prim;
         padding: 0 0 1rem 0;
         cursor: pointer;
-        
+
         &-img {
             position: relative;
 
@@ -137,31 +223,67 @@ img {
 
             h3 {
                 font-size: 1.5rem;
+                flex-basis: 75%;
             }
+
+            span {
+                flex-basis: 25%;
+                font-size: .875rem;
+            }
+
         }
     }
 
     &__popup {
         position: absolute;
-        background: $bgClr-tertiary;
         transform: translateY(0);
         z-index: 99;
-        // change transform => all
-        // transition: transform .3s ease-in-out;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: .5rem 0;
+        margin: .5rem 0;
+        background: $bgClr-tertiary;
+        transition: all .3s ease-in-out;
 
         &-container {
-            max-width: 40rem;
-            box-shadow: $shadow-prim;
-            padding: 2rem;
             position: relative;
-            height: 100vh;
+            padding: 2rem;
+            max-width: 40rem;
+            height: 96vh;
+            background: #fff;
             overflow-y: auto;
+            box-shadow: $shadow-prim;
         }
 
         &-title {
             font-size: 2.5rem;
             text-align: center;
             margin-bottom: 2rem;
+        }
+
+        &-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+
+            span {
+                background: #7a7a7a;
+                color: #fafafa;
+                border-radius: 1rem;
+                padding: 0 1rem;
+            }
+        }
+
+        &-heart {
+            cursor: pointer;
+
+            &:hover {
+                color: $bgClr-secondary;
+            }
         }
 
         &-details {
@@ -189,97 +311,44 @@ img {
 
         &.hidden {
             opacity: 0;
+            visibility: hidden;
             transform: translateY(-100%);
         }
+    }
+
+    &__loader {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #666;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+
+        &-spinner {
+            font-size: 3rem;
+            animation: spin 1s linear infinite;
+        }
+    }
+}
+
+// Animations
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
     }
 }
 
 
 
-// // Should go to Scss Style
-// body {
-//     position: relative;
-// }
 
-// .meals__loader {
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//     width: 100vw;
-//     height: 100vh;
-//     background: #666;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     opacity: 0;
-//     visibility: hidden;
-// }
 
-// .meals__loader.loading {
-//     opacity: 1;
-//     visibility: visible;
-// }
 
-// .meals__loader-spinner {
-//     font-size: 3rem;
-//     animation: spin 1s linear infinite;
-// }
-
-// @keyframes spin {
-//     0% {
-//         transform: rotate(0deg);
-//     }
-
-//     100% {
-//         transform: rotate(360deg);
-//     }
-// }
-
-// .meals__popup {
-//     margin: .5rem 0;
-//     width: 100vw;
-//     height: 100vh;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     padding: .5rem 0;
-//     background: #7a7a7a;
-//     transition: all .3s ease-in-out !important;
-// }
-
-// .meals__popup-container {
-//     background: #fff;
-//     height: 96vh;
-// }
-
-// .meals__popup-info {
-//     display: flex;
-//     justify-content: space-between;
-//     align-items: center;
-//     padding-top: 1rem;
-// }
-
-// .meals__popup-info span {
-//     background: #7a7a7a;
-//     color: #fafafa;
-//     border-radius: 1rem;
-//     padding: 0 1rem;
-// }
-
-// .meals__popup-heart {
-//     cursor: pointer;
-// }
-
-// .meals__card-footer h3 {
-//     flex-basis: 75%;
-// }
-
-// .meals__card-footer span {
-//     flex-basis: 25%;
-//     font-size: .875rem;
-// }
-
-// .meals__card-heart:hover {
-//     color: red
-// }
 

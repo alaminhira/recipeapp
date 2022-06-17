@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <!-- Main Style -->
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="loader.css">
     <!-- Page Script -->
     <script defer src="script.js"></script>
 </head>
@@ -18,55 +17,26 @@
 <body>
     <section class="meals__container">
         <!-- Meals Header -->
-        <form class="meals__header">
-            <input type="text" class="meals__search-input" id="search">
-            <label class="meals__search-icon" for="search"><i class="fas fa-search"></i></label>
+        <form class="meals__header" autocomplete="off">
+            <div class="meals__search-box">
+                <input type="text" class="meals__search-input" id="search">
+                <label class="meals__search-icon" for="search"><i class="fas fa-search"></i></label>
+            </div>
         </form>
-        <!-- Favourite Meals -->
-        <div class="meals__fav">
-            <h1 class="meals__fav-title">Favourite Meals</h1>
-            <ul class="meals__fav-list">
-                <!-- Meal Item -->
-                <!-- <li class="meals__fav-item">
-                    <img src="fav-meal-1.jpg" alt="Meal">
-                    <h4>Nagalus</h4>
-                </li> -->
-            </ul>
-        </div>
-        <!-- Main Meals -->
-        <div class="meals__main">
-            <!-- Meals Item card -->
-           
+        <div class="meals__body">
+            <!-- Search List -->
+            <ul class="meals__search-list"></ul>
+            <!-- Favourite Meals -->
+            <div class="meals__fav">
+                <h1 class="meals__fav-title">Favourite Meals</h1>
+                <ul class="meals__fav-list"></ul>
+            </div>
+            <!-- Main Meals -->
+            <div class="meals__main"></div>
         </div>
     </section>
     <!-- Meals Details Popup -->
-    <div class="meals__popup hidden">
-        <div class="meals__popup-container">
-            <h2 class="meals__popup-title">Lorem ipsum dolor sit amet.</h2>
-            <div class="meals__popup-header">
-                <img src="main-meal.jpg" alt="">
-                <p class="meals__popup-info">
-                    <span>Random Recipe</span>
-                    <i class="far fa-heart meals__popup-heart"></i>
-                </p>
-            </div>
-            <p class="meals__popup-details">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima veritatis
-                accusamus illum eius vitae tempora, iure perferendis dolore veniam odit cupiditate molestiae praesentium
-                fugiat, eos molestias ipsam. Cum, culpa nam?</p>
-            <div class="meals__popup-ings">
-                <h3>Ingredients</h3>
-                <ul class="meals__popup-list">
-                    <li>Sardines-8</li>
-                    <li>Sardines-8</li>
-                </ul>
-            </div>
-            <i class="fas fa-close meals__popup-close"></i>
-        </div>
-    </div>
-    <!-- Loader -->
-    <div class="meals__loader">
-        <i class="fas fa-spinner meals__loader-spinner"></i>
-    </div>
+    <div class="meals__popup hidden"></div>
 </body>
 
 </html>
