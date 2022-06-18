@@ -47,6 +47,10 @@ const calcReadingTime = function (meal) {
 const renderSearchedMeals = function(mealsArr) {
     mealsSearchList.style.display = 'block';
     mealsSearchList.innerHTML = '';
+    mealsSearchList.insertAdjacentHTML(
+        'afterbegin',
+        '<i class="fas fa-times meals__search-close"></i>'
+    );
 
     mealsArr.forEach(meal => {
         const readingTime = calcReadingTime(meal);
@@ -66,6 +70,12 @@ const renderSearchedMeals = function(mealsArr) {
             `;
         mealsSearchList.insertAdjacentHTML('beforeend', html);
     })
+}
+
+const hideList = function(e) {
+    if (!e.target.classList.contains('meals__search-close')) return;
+
+    this.style.display = 'none';
 }
 
 let timer = null;
@@ -247,7 +257,7 @@ const closePopup = () => {
 const init = function () {
     renderMainMeal();
     inputSearch.addEventListener('keyup', loadSearchedMeals);
-    // headerMeals.addEventListener('')
+    mealsSearchList.addEventListener('click', hideList);
     mealsContainer.addEventListener('click', toggleMealsPopup);
     mealsPopup.addEventListener('click', toggleFavItem);
 }

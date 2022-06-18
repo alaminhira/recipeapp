@@ -26,21 +26,21 @@ body {
     background: $bgClr-tertiary;
     overflow-y: hidden;
 
-    &.hidden {
-        overflow-x: hidden;
+    // &.hidden {
+    //     overflow-x: hidden;
 
-        &::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: $bgClr-primary;
-            z-index: 9;
-            transition: all .1s ease-in-out;
-        }
-    }
+    //     &::before {
+    //         content: '';
+    //         position: absolute;
+    //         top: 0;
+    //         left: 0;
+    //         width: 100vw;
+    //         height: 100vh;
+    //         background: $bgClr-primary;
+    //         z-index: 9;
+    //         transition: all .1s ease-in-out;
+    //     }
+    // }
 }
 
 a,
@@ -106,18 +106,17 @@ img {
             z-index: 99;
             overflow-y: auto;
             box-shadow: $shadow-prim;
-            // display: none;
+            display: none;
+        }
 
-            &::before {
-                font-family: FontAwesome;
-                content: "\f00d";
-                position: absolute;
-                line-height: 1;
-                right: .5rem;
-                padding: .2rem;
-                font-size: 2rem;
-                cursor: pointer;
-            }
+        &-close {
+            position: absolute;
+            line-height: 1;
+            right: .5rem;
+            padding: .2rem;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 999;
         }
 
         &-item {
