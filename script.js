@@ -44,12 +44,16 @@ const calcReadingTime = function (meal) {
     return Math.ceil(wordCount / WPM);
 }
 
-const renderSearchedMeals = function(mealsArr) {
+const renderSearchedMeals = function(mealsArr, matched) {
     mealsSearchList.style.display = 'block';
     mealsSearchList.innerHTML = '';
     mealsSearchList.insertAdjacentHTML(
         'afterbegin',
-        '<i class="fas fa-times meals__search-close"></i>'
+        `<div class="meals__search-header">
+            ${!matched ? '<p>No matched meal found. Related meals are:</p>' : ''}
+            <i class="fas fa-times meals__search-close"></i>
+        </div>
+        `
     );
 
     mealsArr.forEach(meal => {
@@ -72,7 +76,7 @@ const renderSearchedMeals = function(mealsArr) {
     })
 }
 
-const hideList = function(e) {
+const hideSearchedList = function(e) {
     if (!e.target.classList.contains('meals__search-close')) return;
 
     this.style.display = 'none';
@@ -96,12 +100,18 @@ const loadSearchedMeals = function() {
         // Retrive data
         let data = 
             await getData(`https://www.themealdb.com/api/json/v1/1/search.php?s=${input}`);
-            
-        data = data.meals ? data : await getData(`https://www.themealdb.com/api/json/v1/1/search.php?f=${[...input][0]}`);
-        
-        // Render meals on UI
-        renderSearchedMeals(data.meals);
 
+        if (data.meals) {
+            // Render meals on UI
+            renderSearchedMeals(data.meals, true);
+            
+        } else {
+            data = await getData(`https://www.themealdb.com/api/json/v1/1/search.php?f=${[...input][0]}`);
+            
+            // Render meals on UI
+            renderSearchedMeals(data.meals);
+        }
+            
         // Hide loader
         hideLoader(data);
 
@@ -257,7 +267,7 @@ const closePopup = () => {
 const init = function () {
     renderMainMeal();
     inputSearch.addEventListener('keyup', loadSearchedMeals);
-    mealsSearchList.addEventListener('click', hideList);
+    mealsSearchList.addEventListener('click', hideSearchedList);
     mealsContainer.addEventListener('click', toggleMealsPopup);
     mealsPopup.addEventListener('click', toggleFavItem);
 }

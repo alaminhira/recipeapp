@@ -109,10 +109,17 @@ img {
             display: none;
         }
 
+        &-header {
+            p {
+                margin: .5rem 1rem;
+            }
+        }
+
         &-close {
             position: absolute;
             line-height: 1;
             right: .5rem;
+            top: 0.3rem;
             padding: .2rem;
             font-size: 2rem;
             cursor: pointer;
